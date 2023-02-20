@@ -9,7 +9,7 @@ ELASTICSEARCH_PASS = environ.get("ELASTICSEARCH_PASS","")
 client = Elasticsearch(ELASTICSEARCH_URL, basic_auth=(ELASTICSEARCH_USER,ELASTICSEARCH_PASS))
 
 def process(text):
-    return list(set(x.group() for x in re.finditer("\d+(-\w+)?/(\w+.)(\s)?(\w+.?)+(-\w+)?", text)))
+    return list(set(x.group() for x in re.finditer("\d+(\-\w+)?\/(\w+\.)(\s)?(\w+\.?)+(\-\w+)?(\.\w\d)?", text)))
 
 def searchProcs(proc, UUID):
     must = [{'term': {'Processo': proc}}, {'wildcard': {'UUID': f"{UUID}*"}}]
